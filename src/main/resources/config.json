@@ -1,0 +1,56 @@
+{
+  "system": {
+    "name": "AVATAR BRAIN",
+    "version": "1.2",
+    "language": "ru"
+  },
+  "ollama": {
+    "url": "http://localhost:11434/api/generate",
+    "model": "saiga",
+    "timeout_seconds": 300,
+
+    "num_predict": 150,
+
+    "top_k": 30,
+    "top_p": 0.85,
+    "temperature": 1.1,
+    "repeat_penalty": 1.1,
+
+    "num_thread": 4,
+
+    "stop": [],
+
+    "gpu_optimization": {
+      "enabled": true,
+      "nvidia": {
+        "use_cuda": true,
+        "gpu_layers": -1
+      }
+    }
+  },
+
+  "qdrant": {
+    "host": "localhost",
+    "port": 6333,
+    "collection": "avatar_memories"
+  },
+
+  "prompts": {
+    "system_instruction_path": "prompts/system.txt",
+    "memory_context_header": "--- КОНТЕКСТ ПАМЯТИ ---",
+    "memory_context_footer": "--- КОНЕЦ КОНТЕКСТА ---"
+  },
+
+  "memory": {
+    "max_context_memories": 20,
+    "max_search_results": 1,
+    "daemon_enabled": false
+  },
+
+  "ui": {
+    "startup_message": "✅ Система готова.",
+    "prompt_prefix": "👤 Вы: ",
+    "ai_prefix": "🤖 Аватар: ",
+    "loading_indicator": "⏳ ..."
+  }
+}

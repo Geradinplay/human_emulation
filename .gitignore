@@ -1,0 +1,7 @@
+models/Saiga-llama3-L3-Stheno-8B-v3.2.Q4_K_M.gguf
+/target/
+
+/.idea/compiler.xml
+/.idea/.gitignore
+/.idea/
+bin/

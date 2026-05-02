@@ -1,0 +1,60 @@
+version: "3.9"
+
+services:
+  qwen-ai:
+    image: ollama/ollama:latest
+    container_name: qwen_server
+    ports:
+      - "11434:11434"
+
+    volumes:
+      - ollama_data:/root/.ollama
+      - ./models:/models
+
+    environment:
+      OLLAMA_KEEP_ALIVE: "5m"
+      OLLAMA_NUM_GPU: "-1"
+      OLLAMA_HOST: "0.0.0.0:11434"
+      CUDA_VISIBLE_DEVICES: "0"
+
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+
+    restart: unless-stopped
+
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:11434/api/tags"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+
+  qdrant:
+    image: qdrant/qdrant:latest
+    container_name: qdrant_server
+    ports:
+      - "6333:6333"
+      - "6334:6334"
+
+    volumes:
+      - qdrant_storage:/qdrant/storage
+
+    environment:
+      QDRANT_API_KEY: "avatar_secret_key"
+
+    restart: unless-stopped
+
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:6333/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+volumes:
+  ollama_data:
+  qdrant_storage:

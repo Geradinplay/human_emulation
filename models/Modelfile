@@ -1,0 +1,9 @@
+FROM /models/Saiga-llama3-L3-Stheno-8B-v3.2.Q4_K_M.gguf
+
+# GPU оптимизация для NVIDIA
+PARAMETER num_predict 150
+PARAMETER temperature 0.5
+PARAMETER top_p 0.85
+PARAMETER top_k 30
+PARAMETER repeat_penalty 1.1
+

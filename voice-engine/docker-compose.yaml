@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  tts-chat:
+    build: ./tts-chat
+    container_name: avatar-tts-engine
+    ports:
+      - "8080:8080"
+    volumes:
+      - chattts_weights:/root/.cache/huggingface
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+
+volumes:
+  chattts_weights:

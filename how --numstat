@@ -1,0 +1,23 @@
+[33mcommit 059004ec9839b7df172a96b72f6063558e84bbf0[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmaster[m[33m)[m
+Author: Geradine <ehfy2005@gmail.com>
+Date:   Wed Apr 29 16:52:23 2026 +0300
+
+    Rewrote the interaction of emotions with AI, removed junk code
+
+ .idea/dictionaries/project.xml                     |  7 [32m++[m
+ .idea/workspace.xml                                | 82 [32m++++++++++[m[31m---------[m
+ src/main/java/org/example/AvatarBrain.java         | 86 [32m++++++++++[m[31m----------[m
+ src/main/java/org/example/ui/AvatarBrainGUI.java   | 91 [32m++++[m[31m------------------[m
+ src/main/java/org/example/vts/VTSLauncher.java     | 28 [32m++++[m[31m---[m
+ .../IdleBehavior/DefaultIdleBehavior.java          |  6 [32m++[m
+ .../customeAnimations/BlushBehavior.java           |  8 [32m+[m[31m-[m
+ .../customeAnimations/HeadShakeBehavior.java       |  7 [32m++[m
+ .../animations/generators/VTSIdleGenerator.java    | 11 [32m+++[m
+ .../animations/interfaces/AnimationBehavior.java   |  4 [32m+[m
+ .../example/vts/client/ExpressionHandlerStub.java  | 71 [32m+++++[m[31m------------[m
+ .../example/vts/client/VTubeStudioServiceStub.java | 24 [31m------[m
+ .../vts/expressions/ExpressionRegistry.java        |  2 [32m+[m[31m-[m
+ .../customeExpressions/AngryExpression.java        |  8 [32m+[m[31m-[m
+ .../example/vts/manager/VTSMovementManager.java    | 80 [32m++++++++++++[m[31m-------[m
+ src/main/resources/prompts/system.txt              | 56 [32m++++++[m[31m-------[m
+ 16 files changed, 262 insertions(+), 309 deletions(-)
