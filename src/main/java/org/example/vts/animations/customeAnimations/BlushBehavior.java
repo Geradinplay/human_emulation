@@ -126,7 +126,7 @@ public class BlushBehavior implements AnimationBehavior{
 
     @Override
     public void play(VTSIdleGenerator idleGenerator) {
-        idleGenerator.setTemporaryBehavior(this, 30000L );
+        idleGenerator.addOverlay(this, duration);
     }
 
     @Override

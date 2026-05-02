@@ -30,21 +30,17 @@ public class DefaultIdleBehavior implements AnimationBehavior {
             impulseTimer = time + 2.5 + random.nextDouble() * 4.0;
         }
 
-        // --- ГОЛОВА ---
         double targetX = (Math.sin(time * 0.15) * 4.0) + impulseX;
         double targetY = (Math.sin(time * 0.1) * 0.5) + impulseY;
         double targetZ = Math.sin(time * 0.15) * 5.0;
 
-        // ПЛАВНОСТЬ
         lastX += (targetX - lastX) * 0.12;
         lastY += (targetY - lastY) * 0.05;
         lastZ += (targetZ - lastZ) * 0.08;
 
-        // --- ТЕЛО ---
         double targetBody = lastX * 0.35;
         lastBody += (targetBody - lastBody) * 0.04;
 
-        // --- ГЛАЗА ---
         double rawEyeX = (lastX * 0.01) + (Math.sin(time * 1.1) * 0.35);
         double rawEyeY = (lastY * 0.02) + (Math.cos(time * 0.9) * 0.1);
 
@@ -71,8 +67,10 @@ public class DefaultIdleBehavior implements AnimationBehavior {
 
     @Override
     public void play(VTSIdleGenerator idleGenerator) {
-        idleGenerator.setTemporaryBehavior(this, 2000L);
+        // ✅ теперь это базовое поведение
+        idleGenerator.setBaseBehavior(this);
     }
+
     @Override
     public String getName() {
         return "default_idle";

@@ -9,10 +9,10 @@ public class BlushExpression implements ExpressionBehavior {
 
     private final VTubeStudioClient client;
 
-    // Передаем клиент при создании
     public BlushExpression(VTubeStudioClient client) {
         this.client = client;
     }
+
     @Override
     public String getName() {
         return "blush";
@@ -20,9 +20,15 @@ public class BlushExpression implements ExpressionBehavior {
 
     @Override
     public void apply(VTSIdleGenerator idleGenerator) {
-        idleGenerator.setTemporaryBehavior(new BlushBehavior(), 20000L, () -> {
-            client.sendExpression("blush", false);
-        });
-    }
 
+        BlushBehavior behavior = new BlushBehavior();
+
+        // ✅ новый API
+        idleGenerator.addOverlay(
+                behavior,
+                20000L,
+                1.0,
+                () -> client.sendExpression("blush", false)
+        );
+    }
 }
