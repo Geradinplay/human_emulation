@@ -14,6 +14,7 @@ import org.example.db.service.EmbeddingService;
 import org.example.db.service.QdrantMemoryService;
 import org.example.vts.VTSLauncher;
 import org.example.vts.client.ExpressionHandlerStub;
+import org.example.vts.client.VTubeStudioClient;
 
 
 public class AvatarBrain {
@@ -41,8 +42,15 @@ public class AvatarBrain {
     /**
      * Инициализирует систему памяти
      */
-    public void initializeMemory() throws Exception {
-        initializeMemory(config.getQdrantHost(), config.getQdrantPort());
+    public void initializeMemory(){
+        try {
+            initializeMemory(config.getQdrantHost(), config.getQdrantPort());
+        } catch (Exception e) {
+            throw new RuntimeException("Ошибка инициализации памяти: " + e.getMessage(), e);
+        }
+    }
+    public VTubeStudioClient getClient(){
+        return vtsLauncher.getClient();
     }
 
     public void initializeMemory(String qdrantUrl, int qdrantPort) throws Exception {
@@ -269,5 +277,9 @@ public class AvatarBrain {
 
     private boolean isValidEmotionTag(String tag) {
         return List.of("angry", "blush", "smile", "suspicious", "happy").contains(tag.toLowerCase());
+    }
+
+    public static void main(String[] args) {
+
     }
 }
